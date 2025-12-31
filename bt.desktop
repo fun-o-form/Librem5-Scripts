@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=BT Reset
+Comment=Reset BT
+Exec=sudo -i sh -c "/usr/bin/hciattach -s 115200 /dev/ttymxc3 bcm43xx 1500000"
+Icon=/home/puri/Documents/bt.png
+Terminal=true
+Categories=Utility;

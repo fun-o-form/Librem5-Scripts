@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=MDP
+Comment=Music Directory Player
+Exec=bash -c "cd /home/puri/player && ./launch-mdp-java.sh"
+Icon=/home/puri/player/icons8-play-64.png
+Terminal=false
+Categories=Utility;

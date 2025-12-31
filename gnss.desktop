@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GNSS Share
+Comment=GNSS Share
+Exec=sudo -i sh -c "gnss-share"
+Icon=/home/puri/Documents/gps.png
+Terminal=true
+Categories=Utility;
