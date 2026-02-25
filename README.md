@@ -1,4 +1,23 @@
+# Librem5 Scripts
+
+Contains scripts that make daily driving the Librem5 phone easier.
+
+## install-local.bash
+This is your one stop shop for configuring your fresh OS install on your Librem5 phone. This script installs useful apps, applies gnome config changes, and provides several scripts as runnable apps to overcome obstacles in daily driving the Librem 5.
+
+### Usage
+```
+ssh <phone-ip>
+sudo apk add git
+git clone https://github.com/fun-o-form/Librem5-Scripts.git
+cd Librem5-Scripts
+./install-local.bash
+```
+
 A collection of scripts and utilities that have made my life easier in daily driving the Librem5 with Postmarket OS (Phosh) installed. Update the paths in the *.desktop files as needed for your home directory.
+
+### Scripts as Apps
+The following scripts are installable above. Each script has a desktop entry so they appear like full applications easily launchable from the phone user interface.
 
 | script | Description |
 | -- | -- |

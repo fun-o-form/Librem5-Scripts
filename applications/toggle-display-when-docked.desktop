@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Docked Display
+Comment=Turn off built-in display when docked
+Exec=toggle-display-when-docked.sh
+Icon=phone-monitor.png
+Terminal=false
+Categories=Utility;
