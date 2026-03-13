@@ -71,7 +71,10 @@ if yes_or_no "Do you want to install MusicDirPlayer?"; then
 	fi
 	wget github.com/fun-o-form/music-dir-player-java/releases/latest/download/music-dir-player.zip
 	unzip music-dir-player.zip -d music-dir-player
-	music-dir-player/install.sh
+	cd music-dir-player
+	./install.sh
+	cd ..
+	rm music-dir-player* -rf
 fi
 
 ############### GPS Apps ###############
