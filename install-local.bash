@@ -69,7 +69,9 @@ if yes_or_no "Do you want to install MusicDirPlayer?"; then
 	else
 		echo "Java found, skipping install"
 	fi
-	# TODO: Generate a MDP release so we can curl install it here
+	wget github.com/fun-o-form/music-dir-player-java/releases/latest/download/music-dir-player.zip
+	unzip music-dir-player.zip -d music-dir-player
+	music-dir-player/install.sh
 fi
 
 ############### GPS Apps ###############
