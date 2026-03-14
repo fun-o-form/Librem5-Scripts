@@ -79,7 +79,7 @@ fi
 
 ############### GPS Apps ###############
 if yes_or_no "Do you want to install GPS related apps?"; then
-	echo "PureMaps, OSMScoutServer, and Satelitte"
+	echo "PureMaps, OSMScoutServer, and Satellite"
 	sudo flatpak install -y io.github.rinigus.PureMaps io.github.rinigus.OSMScoutServer page.codeberg.tpikonen.satellite
 	
 	echo "Adding current user to geoclue group so Satellite works"
