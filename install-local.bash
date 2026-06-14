@@ -57,6 +57,7 @@ if yes_or_no "Install useful scripts?"; then
 	cp ./applications/*.desktop ~/.local/share/applications
 
 	# Install scripts used by our desktop files
+        mkdir -p ~/.local/bin
 	cp ./applications/toggle-display-when-docked.sh ~/.local/bin/
 	chmod +x ~/.local/bin/toggle-display-when-docked.sh
 fi
@@ -65,7 +66,14 @@ fi
 if yes_or_no "Do you want to install MusicDirPlayer?"; then
 	if app_not_found "java"; then
 		echo "Installing Java"
-		sudo apk add openjdk25-jre --no-interactive
+		if ! app_not_found "apk"; then
+			sudo apk add openjdk25-jre --no-interactive
+		elif ! app_not_found "apt"; then
+			sudo apt install unzip default-jre -y
+		else
+			echo "No supported package manager found. Exiting"
+			exit 1
+		fi
 	else
 		echo "Java found, skipping install"
 	fi
@@ -86,6 +94,16 @@ if yes_or_no "Do you want to install GPS related apps?"; then
 	curUser=$(whoami)
 	sudo usermod -aG geoclue ${curUser}
 	echo "IMPORTANT: Reboot for group changes to take effect"
+	
+	echo "Install osmin"
+	if ! app_not_found "apk"; then
+		sudo apk add osmin --no-interactive
+	elif ! app_not_found "apt"; then
+		sudo apt install osmin -y
+	else
+		echo "No supported package manager found. Exiting"
+		exit 1
+	fi
 fi
 
 ############### Nextcloud Apps ###############
@@ -100,7 +118,15 @@ if yes_or_no "Do you want to other useful apps?"; then
 	sudo flatpak install -y org.gabmus.gfeeds org.kde.audiotube org.kde.kweather
 	
 	echo "Installing xrandr for wayland, needed for docking station display script"
-	sudo apk add wlr-randr --no-interactive
+	
+	if ! app_not_found "apk"; then
+		sudo apk add wlr-randr --no-interactive
+	elif ! app_not_found "apt"; then
+		sudo apt install wlr-randr -y
+	else
+		echo "No supported package manager found. Exiting"
+		exit 1
+	fi
 fi
 
 echo -e "\033[1;92m All done \033[0m"
