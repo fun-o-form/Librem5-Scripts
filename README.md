@@ -13,9 +13,22 @@ It may work on other phones and Linux mobile versions but your mileage may vary.
 This is your one stop shop for configuring your fresh OS install on your Librem5 phone. This script installs useful apps, applies gnome config changes, and provides several scripts as runnable apps to overcome obstacles in daily driving the Librem 5.
 
 ### Usage
+On PostmarketOS
 ```
 ssh <phone-ip>
 sudo apk add git
+git clone https://github.com/fun-o-form/Librem5-Scripts.git
+cd Librem5-Scripts
+./install-local.bash
+```
+
+On PureOS
+```
+# From phone
+sudo apt install openssh-server
+# From computer
+ssh purism@<phone-ip>
+sudo apt install git
 git clone https://github.com/fun-o-form/Librem5-Scripts.git
 cd Librem5-Scripts
 ./install-local.bash

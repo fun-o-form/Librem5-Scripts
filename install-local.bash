@@ -118,11 +118,12 @@ if yes_or_no "Do you want to other useful apps?"; then
 	sudo flatpak install -y org.gabmus.gfeeds org.kde.audiotube org.kde.kweather
 	
 	echo "Installing xrandr for wayland, needed for docking station display script"
+	echo "and installing VLC and the disk utility."
 	
 	if ! app_not_found "apk"; then
-		sudo apk add wlr-randr --no-interactive
+		sudo apk add wlr-randr vlc-qt gnome-disk-utility --no-interactive
 	elif ! app_not_found "apt"; then
-		sudo apt install wlr-randr -y
+		sudo apt install wlr-randr vlc-qt gnome-disk-utility -y
 	else
 		echo "No supported package manager found. Exiting"
 		exit 1
