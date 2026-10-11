@@ -1,9 +1,9 @@
 # Librem5 Scripts
 
-Contains scripts that make daily driving the Librem5 phone easier.
+Contains scripts that make daily driving the Librem5 phone easier. I use this script setup my phone after a new OS install.
 
 **Warning**: This repo is tested on:
-  * PostmarketOS, edge version
+  * PostmarketOS edge and PureOS Crimson
   * Running Phosh
   * On the Librem5
   
@@ -34,7 +34,11 @@ cd Librem5-Scripts
 ./install-local.bash
 ```
 
-A collection of scripts and utilities that have made my life easier in daily driving the Librem5 with Postmarket OS (Phosh) installed. Update the paths in the *.desktop files as needed for your home directory.
+The script will prompt you for a yes/no before each block of installations (e.g. gps apps, nextcloud apps). If you want to install everything in one shot without being prompted, provide the `all` argument.
+
+```
+./install-local.bash all
+```
 
 ### What does it do?
 The script performs the following tasks. Each task has a yes/no prompt so you can skip individual tasks as desired.
