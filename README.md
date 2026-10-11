@@ -56,10 +56,13 @@ The script performs the following tasks. Each task has a yes/no prompt so you ca
 	* **PureMaps** - The best navigation application I have found
 	* **OSM Scout Server** - Enables offline maps and navigation in PureMaps
 	* **Satellite** - Displays GPS satellite reception to help with troubleshooting. Makes it very clear when you have a lock.
-5. Nextcloud Apps  
+	* **OSMin** - Another navigation application.
+5. Nextcloud Apps 
  	* **Errands** - Synchronize your tasks with your Nextcloud instance.
  	* **Iotas** - Add, edit, delete notes stored on your Nextcloud instance.
 6. Other Useful Apps
  	* **AudioTube** - Play music streamed from Youtube. Does not require Youtube premium.
   	* **Feeds** - The best RSS reader I have found for Linux mobile.
   	* **KWeather** - The best weather app for I have used so far. Has an adaptive layout.
+  	* **VLC** - For watching movies on the phone. Supports hardware for low CPU playback.
+  	* **xrandr** - For controlling display settings. Used by the Docked Display script.
