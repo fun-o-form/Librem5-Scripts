@@ -4,19 +4,28 @@
 #!/bin/bash
 set -e
 
-# Simple method to allow the user to opt out of some installs
-yes_or_no() {
-    while true; do
-    	# print message in green high intensity console code
-    	echo -n -e "\033[1;92m $* \033[0m"
-        read -p " [y/n]: " yn
-        case $yn in
-            [Yy]* ) return 0 ;; # Return 0 (success) for yes/Y
-            [Nn]* ) return 1 ;; # Return 1 (failure) for no/N
-            * ) echo "Please answer yes or no." ;; # Prompt again for invalid input
-        esac
-    done
-}
+# Define the yes_or_no function that allows the user to choose which installs to conduct.
+# If the user specified the "all" command line argument, then we don't bother prompting
+# them for each install. Just do it.
+if [[ -n "$1" && "$1" == "all" ]]; then
+    yes_or_no() {
+        echo -n -e "\033[1;92m $* \033[0m - Yes\r\n"
+        return 0
+    }
+else
+    yes_or_no() {
+        while true; do
+            # print message in green high intensity console code
+            echo -n -e "\033[1;92m $* \033[0m"
+            read -p " [y/n]: " yn
+            case $yn in
+                [Yy]* ) return 0 ;; # Return 0 (success) for yes/Y
+                [Nn]* ) return 1 ;; # Return 1 (failure) for no/N
+                * ) echo "Please answer yes or no." ;; # Prompt again for invalid input
+            esac
+        done
+    }
+fi
 
 # Let's us check if an app is already installed
 app_not_found() {
@@ -27,7 +36,7 @@ app_not_found() {
 	fi
 }
 
-echo "Script is tested on a Librem5 running Postmarket OS edge (25.12+) with Phosh UI. Other devices/OS's/versions might still work."
+echo "Script is tested on a Librem5 running PureOS Crimson or Postmarket OS edge (25.12+) with Phosh UI. Other devices/OS's/versions might still work."
 
 ############### Settings ###############
 if yes_or_no "Apply quality of life settings for mobile?"; then
@@ -87,8 +96,11 @@ fi
 
 ############### GPS Apps ###############
 if yes_or_no "Do you want to install GPS related apps?"; then
+	echo "Enabling flathub"
+        flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 	echo "PureMaps, OSMScoutServer, and Satellite"
-	sudo flatpak install -y io.github.rinigus.PureMaps io.github.rinigus.OSMScoutServer page.codeberg.tpikonen.satellite
+	sudo flatpak install -y flathub io.github.rinigus.PureMaps io.github.rinigus.OSMScoutServer page.codeberg.tpikonen.satellite
 	
 	echo "Adding current user to geoclue group so Satellite works"
 	curUser=$(whoami)
@@ -99,7 +111,8 @@ if yes_or_no "Do you want to install GPS related apps?"; then
 	if ! app_not_found "apk"; then
 		sudo apk add osmin --no-interactive
 	elif ! app_not_found "apt"; then
-		sudo apt install osmin -y
+		echo "OSMin is not available in the PureOS repos. Skipping install."
+		#sudo apt install osmin -y
 	else
 		echo "No supported package manager found. Exiting"
 		exit 1
@@ -108,14 +121,20 @@ fi
 
 ############### Nextcloud Apps ###############
 if yes_or_no "Do you want to install Nextcloud-related apps?"; then
+	echo "Enabling flathub"
+        flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 	echo "Installing Errands (tasks) and Iotas (notes)"
-	sudo flatpak install -y io.github.mrvladus.List org.gnome.World.Iotas
+	sudo flatpak install -y flathub io.github.mrvladus.List org.gnome.World.Iotas
 fi
 
 ############### Other Apps ###############
 if yes_or_no "Do you want to other useful apps?"; then
+	echo "Enabling flathub"
+        flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	
 	echo "Installing Feeds, AudioTube, and KWeather"
-	sudo flatpak install -y org.gabmus.gfeeds org.kde.audiotube org.kde.kweather
+	sudo flatpak install -y flathub org.gabmus.gfeeds org.kde.audiotube org.kde.kweather
 	
 	echo "Installing xrandr for wayland, needed for docking station display script"
 	echo "and installing VLC and the disk utility."
@@ -123,7 +142,7 @@ if yes_or_no "Do you want to other useful apps?"; then
 	if ! app_not_found "apk"; then
 		sudo apk add wlr-randr vlc-qt gnome-disk-utility --no-interactive
 	elif ! app_not_found "apt"; then
-		sudo apt install wlr-randr vlc-qt gnome-disk-utility -y
+		sudo apt install wlr-randr vlc gnome-disk-utility -y
 	else
 		echo "No supported package manager found. Exiting"
 		exit 1
