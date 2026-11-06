@@ -78,7 +78,7 @@ if yes_or_no "Do you want to install MusicDirPlayer?"; then
 		if ! app_not_found "apk"; then
 			sudo apk add openjdk25-jre --no-interactive
 		elif ! app_not_found "apt"; then
-			sudo apt install unzip default-jre -y
+			sudo apt install unzip openjdk-17-jre -y
 		else
 			echo "No supported package manager found. Exiting"
 			exit 1
